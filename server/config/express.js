@@ -10,9 +10,11 @@ module.exports.init = () => {
         connect to database
         - reference README for db uri
     */
-    console.log(process.env.DB_URI);
+    
     mongoose.connect(process.env.DB_URI, {
-        useNewUrlParser: true
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true
     });
     mongoose.set('useCreateIndex', true);
     mongoose.set('useFindAndModify', false);
