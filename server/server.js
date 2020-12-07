@@ -1,7 +1,5 @@
 const express = require('./config/express.js')
  
-require("dotenv").config();
-
 // Use env port or default
 const port = process.env.PORT || 5000;
 
