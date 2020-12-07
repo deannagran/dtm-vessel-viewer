@@ -51,7 +51,8 @@ export default function App() {
     currVessel: undefined,
   });
 
-
+  let url = window.location.origin;
+  //console.log(url);
   useEffect(() => {
     const checkLoggedIn = async () => {
       let token = localStorage.getItem("auth-token");
@@ -60,12 +61,12 @@ export default function App() {
         token = "";
       }
       const tokenRes = await Axios.post(
-        "http://localhost:5000/users/tokenIsValid",
+        url + "/users/tokenIsValid",
         null,
         { headers: { "x-auth-token": token } }
       );
       if (tokenRes.data) {
-        const userRes = await Axios.get("http://localhost:5000/users/", {
+        const userRes = await Axios.get(url + "/users/", {
           headers: { "x-auth-token": token },
         });
         setUserData({
