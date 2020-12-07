@@ -50,7 +50,7 @@ export default function App() {
     user: undefined,
     currVessel: undefined,
   });
-
+/* 
 
   useEffect(() => {
     const checkLoggedIn = async () => {
@@ -76,7 +76,7 @@ export default function App() {
       }
     };
     checkLoggedIn();
-  }, []);
+  }, []); */
 
   return (
     <>
