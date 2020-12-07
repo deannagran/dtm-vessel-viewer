@@ -81,7 +81,7 @@ export default function App() {
   return (
     //<>
       <BrowserRouter>
-        <UserContext.Provider value={{ userData, setUserData }}>
+        
           <Header />
           
           <div className="container">
@@ -101,7 +101,7 @@ export default function App() {
             </Switch>
           </div>
           <Footer />
-        </UserContext.Provider>
+        
       </BrowserRouter>
     //</>
   );
