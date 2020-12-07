@@ -2,6 +2,7 @@ const path = require('path'),
     express = require('express'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
+    cors = require('cors'),
     bodyParser = require('body-parser'),
     exampleRouter = require('../routes/examples.server.routes');
 
@@ -28,6 +29,10 @@ module.exports.init = () => {
     // body parsing middleware
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: true}));
+
+        //handle cross origin requests
+        app.use(cors())
+
     // add a router
     app.use('/users', require("../routes/userRouter"));
 

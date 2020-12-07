@@ -78,6 +78,8 @@ router.post("/login", async (req, res) => {
       // assign payload to user so they can be "logged in" 
       // can later be used to retrieve id of currently logged in user
       const token = jwt.sign({ id: user._id }, JWT_SECRET);
+
+      console.log("token:" + token);
       res.json({
         token,
         user: {
