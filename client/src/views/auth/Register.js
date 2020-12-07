@@ -12,7 +12,7 @@ export default function Register() {
   const [lastName, setLastName] = useState();
   const [companyName, setCompanyName] = useState();
   const [error, setError] = useState();
-  
+  let url = window.location.origin;
 
   const { setUserData } = useContext(UserContext);
   const history = useHistory();
@@ -22,14 +22,13 @@ export default function Register() {
 
     try {
       const newUser = { email, password, passwordCheck, firstName, lastName, companyName };
-      await Axios.post("http://localhost:5000/users/register", newUser);
+      await Axios.post(url + "/users/register", newUser);
       
-      const loginRes = await Axios.post("http://localhost:5000/users/login", {
+      const loginRes = await Axios.post(url + "/users/login", {
         email,
         password,
       });
 
-      console.log(loginRes.email);
       setUserData({
         token: loginRes.data.token,
         user: loginRes.data.user,

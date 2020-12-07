@@ -25,8 +25,6 @@ export default function Dashboard(props) {
       }); 
 
     if(associatedVessels){
-      console.log(associatedVessels.data);
-    
       setVesselName(""+associatedVessels.data.retInfo);
     
       let vesselObject = ({name: ""+associatedVessels.data.retInfo, modelLink:""+associatedVessels.data.retModelLink, 
@@ -51,7 +49,6 @@ export default function Dashboard(props) {
     
     const id = event.target.id;
     let index = null;
-    console.log(id);
 
     for(let i = 0; i<vesselArray.length; i++){
       if(vesselArray[i].name == id){

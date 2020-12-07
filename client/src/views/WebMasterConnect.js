@@ -11,9 +11,10 @@ const WebMasterConnect = () => {
     const [addedUser, setAddedUser] = useState(null);
     const [open, setOpen] = useState(false);
     const [show, setShow] = useState(true);
+    let url = window.location.origin;
 
     const axiosAddUser = async (emailString, vesselString) => {
-      let routeResponse = await Axios.post("http://localhost:5000/users/webMaster",
+      let routeResponse = await Axios.post(url + "/users/webMaster",
       { email: emailString,
         vesselID: vesselString
       }); 
@@ -21,7 +22,6 @@ const WebMasterConnect = () => {
       if(routeResponse){
         if(routeResponse.data.nameOfAddedUser){
           setAddedUser(routeResponse.data.nameOfAddedUser);
-          console.log(routeResponse.data.nameOfAddedUser + " has been added to the project.");
           setShow(true);
         }else{
           setAddedUser('invalid');
@@ -35,7 +35,6 @@ const WebMasterConnect = () => {
     } 
     const submit = () => {
       if(email && vessel){
-          console.log(email);
           setOpen(false);
           axiosAddUser(email, vessel);
           setEmail(null);

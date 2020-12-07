@@ -11,10 +11,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
         const [addedUser, setAddedUser] = useState(null);
         const [open, setOpen] = useState(false);
         const { userData, setUserData } = useContext(UserContext);
-
+        let url = window.location.origin;
 
         const axiosAddUser = async (emailstring) => {
-          let routeResponse = await Axios.post("http://localhost:5000/users/addProjectMember",
+          let routeResponse = await Axios.post(url + "/users/addProjectMember",
           { email: emailstring,
             vesselID: userData.currVessel.id
           }); 
@@ -23,7 +23,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
             if(routeResponse.data.nameOfAddedUser){
               setAddedUser(routeResponse.data.nameOfAddedUser);
               //return routeResponse.data.nameOfAddedUser + '';
-              console.log(routeResponse.data.nameOfAddedUser + " has been added to the project.");
               setShow(true);
             }else{
               setAddedUser('invalid');
@@ -38,11 +37,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
         
         const submit = () => {
           if(email){
-              console.log(email);
               setOpen(false); 
               axiosAddUser(email);
-
-
               setEmail(null);
           }
         }

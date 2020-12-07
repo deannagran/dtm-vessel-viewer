@@ -12,9 +12,10 @@ const WebMasterAddVessel = () => {
     const [open, setOpen] = useState(false);
     const [addedVessel, setAddedVessel] = useState(null);
     const [show, setShow] = useState(true);
+    let url = window.location.origin;
 
     const axiosAddUser = async (nameString, modelLinkString, IMOnumberString) => {
-        let routeResponse = await Axios.post("http://localhost:5000/users/WebMasterAddVessel",
+        let routeResponse = await Axios.post(url + "/users/WebMasterAddVessel",
         {   name: nameString,
             model_link: modelLinkString,
             vesselfinder_link: IMOnumberString
@@ -22,7 +23,6 @@ const WebMasterAddVessel = () => {
         if(routeResponse){
             if(routeResponse.data.vesselName){
               setAddedVessel(routeResponse.data.vesselName);
-              console.log(routeResponse.data.vesselName + " has been added to the project.");
               setShow(true);
             }else{
               setAddedVessel('invalid');
@@ -61,7 +61,6 @@ const WebMasterAddVessel = () => {
     }
     const submit = () => {
         if(name){
-            console.log(name);
             setOpen(false); 
             axiosAddUser(name, modelLink, IMOnumber);
             setName(null);

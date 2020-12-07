@@ -7,22 +7,20 @@ export default function Comments(props) {
   const [commentsArray, setCommentsArray] = useState([]);
   const [refresh, setRefresh] = useState(false);
   const [commentText, setCommentText] = useState("");
+  let url = window.location.origin;
   useEffect(() => {
     if (!userData.user) props.history.push("/login");
 
     //query the database to autopopulate component with comments related to this vessel
     const findComments = async (index) => {
-        let associatedComments = await Axios.post("http://localhost:5000/users/getComment",
+        let associatedComments = await Axios.post(url + "/users/getComment",
         { vesselID: userData.currVessel.id,
           i: index
         }); 
       
         if(associatedComments){
-            console.log("got: " + associatedComments.data.comment);
             let commentObject = ({poster: ""+associatedComments.data.poster, date:""+associatedComments.data.postedDate, comment: ""+associatedComments.data.comment} );
             commentsArray.push(commentObject); 
-        }else{
-            console.log("didnt work");
         }
     }
 
@@ -30,7 +28,6 @@ export default function Comments(props) {
         //add to array of all associated comments:
         for(let i = 0; i < userData.currVessel.numComments; i++){
             findComments(i);
-            console.log("finding " + userData.currVessel.numComments + " comments..." )
         }
       }
     }); 
@@ -53,7 +50,7 @@ const postCommentToDatabase = async (content) => {
     today = mm + '/' + dd + '/' + yyyy;
     today = new Date().toLocaleString();
 
-    let postCommentResponse = await Axios.post("http://localhost:5000/users/postComment",
+    let postCommentResponse = await Axios.post(url + "/users/postComment",
     { vesselID: userData.currVessel.id,
       posterID: userData.user.id,
       date: today,
@@ -61,7 +58,6 @@ const postCommentToDatabase = async (content) => {
     });
 
     if(postCommentResponse){
-        console.log("posted!");
         let updatedVessel = userData.currVessel;
         updatedVessel.numComments = parseInt(userData.currVessel.numComments, 10)+1;
         if(userData){
@@ -78,12 +74,11 @@ const postCommentToDatabase = async (content) => {
 
 const deleteCommentFromDB = async (date) => {
 
-    let delCommentResponse = await Axios.post("http://localhost:5000/users/deleteComment",
+    let delCommentResponse = await Axios.post(url + "/users/deleteComment",
     { vesselID: userData.currVessel.id,
       date: date
     });
     if(delCommentResponse){
-        console.log("deleted!");
         let updatedVessel = userData.currVessel;
         updatedVessel.numComments = parseInt(userData.currVessel.numComments, 10)-1;
         if(userData){
@@ -103,14 +98,12 @@ const del = (event) => {
     event.preventDefault();
     const date = event.target.id;
     if(date){
-        console.log("clicked: " + event.target.id); //the comment id is just the comment content itself
         deleteCommentFromDB(date);
     }
     
 }
 
 const postComment = () => {
-    console.log("posting " + commentText);
     postCommentToDatabase(commentText);
 }
 

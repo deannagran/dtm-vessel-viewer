@@ -10,32 +10,26 @@ const WebMasterList = () => {
     let axiosGetVessels;
     useEffect(() => { 
     let routeResponse;
-    
+    let url = window.location.origin;
+
     axiosGetVessels = async () => {
-        console.log("getting vessels");
-        routeResponse = await Axios.post("http://localhost:5000/users/webMasterList"); 
+        routeResponse = await Axios.post(url + "/users/webMasterList"); 
         
         if(routeResponse){
             setVesselArray(routeResponse.data.docArray);
-            console.log(routeResponse.data.docArray);
-        }else{
-            //console.log("no reply");
         }
         
     }
     axiosdeleteVessel = async (vesselid) => {
-        //console.log("deleteVessel" + vesselid);
-        let routeResponse2 = await Axios.post("http://localhost:5000/users/webMasterListDelete",
+        let routeResponse2 = await Axios.post(url + "/users/webMasterListDelete",
         { 
           name: vesselid
         }); 
-        //console.log(routeResponse2.data.users);
     }
     });
 
     const deleteVessel = (event) => {
         const id = event.target.id;
-        //console.log(id);
         axiosdeleteVessel(id);
         setTimeout(axiosGetVessels, 1000);
     };
