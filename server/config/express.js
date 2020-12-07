@@ -27,10 +27,6 @@ module.exports.init = () => {
 
     // body parsing middleware
     app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({extended: true}));
-
-        //handle cross origin requests
-        app.use(cors())
 
     // add a router
     app.use('/users', require("../routes/userRouter"));
