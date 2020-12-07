@@ -9,7 +9,7 @@ export default function Dashboard(props) {
   const { userData, setUserData } = useContext(UserContext);
   const [vesselName, setVesselName] = useState(0);
   const [vesselArray, setVesselArray] = useState([]);
-
+  let url = window.location.origin;
   useEffect(() => {
     // if user isnt logged in/has an invalid token, push them to login:
     if (!userData.user) props.history.push("/login");
@@ -19,7 +19,7 @@ export default function Dashboard(props) {
 
     //query the database to autopopulate dashboard with vessels
     const findvessels = async (index) => {
-      associatedVessels = await Axios.post("http://localhost:5000/users/findVessel",
+      associatedVessels = await Axios.post(url +"/users/findVessel",
       { user: userData,
         i: index
       }); 
