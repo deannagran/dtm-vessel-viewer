@@ -29,7 +29,7 @@ module.exports.init = () => {
     app.use(bodyParser.json());
 
     // add a router
-    app.use('/api/example', exampleRouter);
+    app.use('/users', require("../routes/userRouter"));
 
     if (process.env.NODE_ENV === 'production') {
         // Serve any static files
