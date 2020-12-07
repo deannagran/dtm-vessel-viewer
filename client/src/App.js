@@ -79,7 +79,7 @@ export default function App() {
   }, []); */
 
   return (
-    <>
+    //<>
       <BrowserRouter>
         <UserContext.Provider value={{ userData, setUserData }}>
           <Header />
@@ -103,6 +103,6 @@ export default function App() {
           <Footer />
         </UserContext.Provider>
       </BrowserRouter>
-    </>
+    //</>
   );
 }
