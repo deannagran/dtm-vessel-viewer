@@ -1,9 +1,9 @@
 import React, { useEffect, useContext } from "react";
 import UserContext from "../../context/UserContext";
-import  useHistory  from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export default function Welcome(props){
-      const { userData } = useContext(UserContext);
+      const  userData  = useContext(UserContext);
       useEffect(() => {
         if (userData.user){
             if(userData.user.webMaster){ 
