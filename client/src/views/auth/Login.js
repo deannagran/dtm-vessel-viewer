@@ -12,13 +12,13 @@ export default function Login() {
 
   const { setUserData } = useContext(UserContext);
   const history = useHistory();
-
+  let url = window.location.origin;
   const submit = async (e) => {
     e.preventDefault();
     try {
       const loginUser = { email, password };
       const loginRes = await Axios.post(
-        "http://localhost:5000/users/login",
+        url + "/users/login",
         loginUser
       );
       setUserData({
