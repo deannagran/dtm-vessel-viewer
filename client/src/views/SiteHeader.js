@@ -8,7 +8,7 @@ export default function SiteHeader() {
       <Link to="/">
         <h1 className="title">DIGITAL TWIN MARINE</h1>
       </Link>
-      <AuthOptions />
+      {/* <AuthOptions /> */}
     </header>
   );
 }
