@@ -41,57 +41,60 @@ export default function Register() {
   };
 
   return (
-    <div>
-	    <h2>Register</h2>
+    <div className="page">
+      <h2>Register</h2>
       {error && (
         <ErrorNotice message={error} clearError={() => setError(undefined)} />
       )}
-        <form className="form" onSubmit={submit}>
-          <label htmlFor="login-email">First Name</label>
-          <input
-            id="login-email"
-            type="text"
-            onChange={(e) => setFirstName(e.target.value)}
-          />
+      <form className="form" onSubmit={submit}>
+      <label htmlFor="register-first-name">First Name *</label>
+        <input
+          id="register-first-name"
+          type="text"
+          onChange={(e) => setFirstName(e.target.value)}
+        />
 
-          <label htmlFor="login-email">Last Name</label>
-          <input
-            id="login-email"
-            type="text"
-            onChange={(e) => setLastName(e.target.value)}
-          />
+        
+        <label htmlFor="register-last-name">Last Name *</label>
+        <input
+          id="register-last-name"
+          type="text"
+          onChange={(e) => setLastName(e.target.value)}
+        />
 
-          <label htmlFor="login-email">Company Name</label>
-          <input
-            id="login-email"
-            type="text"
-            onChange={(e) => setCompanyName(e.target.value)}
-          />
+        <label htmlFor="register-company-name">Company Name</label>
+        <input
+          id="register-company-name"
+          type="text"
+          onChange={(e) => setCompanyName(e.target.value)}
+        />
 
-          <label htmlFor="login-email">Email</label>
-          <input
-            id="login-email"
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
+        <label htmlFor="register-email">Email *</label>
+        <input
+          id="register-email"
+          type="email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-          <label htmlFor="login-password">Password</label>
-          <input
-            id="login-password"
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
+        <label htmlFor="register-password">Password *</label>
+        <input
+          id="register-password"
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Verify password"
+          onChange={(e) => setPasswordCheck(e.target.value)}
+        />
 
-          <label htmlFor="login-password">Verify Password</label>
-          <input
-            id="login-password"
-            type="password"
-            onChange={(e) => setPasswordCheck(e.target.value)}
-          />
-
-          <input type="submit" value="Register" />
-          
-        </form>
-		</div>
+        
+        <input type="submit" value="Register" />
+        <label htmlFor="login-password">Already have an account? Click 
+        <Link to="/login"> here </Link>
+        to login.
+        </label>
+      </form>
+    </div>
   );
 }
