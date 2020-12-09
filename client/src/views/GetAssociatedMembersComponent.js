@@ -24,7 +24,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
         const [showCB, setShowCB] = useState(false);
         const [email, setEmail] = useState(null);
         const [userButtonID, setUserButtonID] = useState("");
-        let url = window.location.origin;
+        //let url = window.location.origin;
 
         const history = useHistory();
         if(userData.currVessel.associatedUsers.length === 0 ){
@@ -35,7 +35,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
         //query the database to autopopulate ProjectPage with members
         const getmembers = async (index) => {
             console.log(userData.currVessel);
-            associatedMembers = await Axios.post(url + "/users/getMember",
+            associatedMembers = await Axios.post(window.location.origin + "/users/getMember",
                 { vessel: userData.currVessel,
                     i: index
                 });
@@ -55,7 +55,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
         }
 
         const updatemember = async (id, role) => {
-            changeMember = await Axios.post(url + "/users/updateMemberRole",
+            changeMember = await Axios.post(window.location.origin + "/users/updateMemberRole",
                 { vesselID: userData.currVessel.id,
                     memberID: id,
                     rolesObject : role
@@ -69,7 +69,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
         }
 
         const deletemember = async (id) => {
-            deleteMember = await Axios.post(url + "/users/deleteMember",
+            deleteMember = await Axios.post(window.location.origin + "/users/deleteMember",
                 { vesselID: userData.currVessel.id,
                     memberID: id
                 });

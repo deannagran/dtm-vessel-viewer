@@ -9,10 +9,10 @@ export default function Comments(props) {
   const [commentText, setCommentText] = useState("");
   useEffect(() => {
     if (!userData.user) props.history.push("/login");
-    let url = window.location.origin;
+    //let url = window.location.origin;
     //query the database to autopopulate component with comments related to this vessel
     const findComments = async (index) => {
-        let associatedComments = await Axios.post(url+"/users/getComment",
+        let associatedComments = await Axios.post(window.location.origin+"/users/getComment",
         { vesselID: userData.currVessel.id,
           i: index
         }); 
@@ -53,7 +53,7 @@ const postCommentToDatabase = async (content) => {
     today = mm + '/' + dd + '/' + yyyy;
     today = new Date().toLocaleString();
 
-    let postCommentResponse = await Axios.post(url + "/users/postComment",
+    let postCommentResponse = await Axios.post(window.location.origin + "/users/postComment",
     { vesselID: userData.currVessel.id,
       posterID: userData.user.id,
       date: today,
@@ -78,7 +78,7 @@ const postCommentToDatabase = async (content) => {
 
 const deleteCommentFromDB = async (date) => {
 
-    let delCommentResponse = await Axios.post(url + "/users/deleteComment",
+    let delCommentResponse = await Axios.post(window.location.origin + "/users/deleteComment",
     { vesselID: userData.currVessel.id,
       date: date
     });
