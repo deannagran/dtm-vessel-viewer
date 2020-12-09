@@ -12,16 +12,17 @@ const WebMasterConnect = () => {
     const [open, setOpen] = useState(false);
     const [show, setShow] = useState(true);
     let url = window.location.origin;
-
-    const axiosAddUser = async (emailString, vesselString) => {
+    const axiosAddUser = async (emailString, vesselString, roles) => {
       let routeResponse = await Axios.post(url + "/users/webMaster",
       { email: emailString,
-        vesselID: vesselString
+        vesselID: vesselString,
+          rolesObject: roles
       }); 
 
       if(routeResponse){
         if(routeResponse.data.nameOfAddedUser){
           setAddedUser(routeResponse.data.nameOfAddedUser);
+          console.log(routeResponse.data.nameOfAddedUser + " has been added to the project.");
           setShow(true);
         }else{
           setAddedUser('invalid');
@@ -34,9 +35,23 @@ const WebMasterConnect = () => {
       }
     } 
     const submit = () => {
+        let roles = {canComment: false, canInvite: false, canEditRoles: false};
+        let canComment = document.getElementById("canComment");
+        if(canComment.checked == true){
+            roles.canComment = true;
+        }
+        let canInvite = document.getElementById("canInvite");
+        if(canInvite.checked == true){
+            roles.canInvite = true;
+        }
+        let canEdit = document.getElementById("canEdit");
+        if(canEdit.checked == true){
+            roles.canEditRoles = true;
+        }
       if(email && vessel){
+          console.log(email);
           setOpen(false);
-          axiosAddUser(email, vessel);
+          axiosAddUser(email, vessel, roles);
           setEmail(null);
           setVessel(null);
       }
@@ -56,7 +71,7 @@ const WebMasterConnect = () => {
           <Alert variant="danger" onClose={() => setShow(false)} dismissible>
             <Alert.Heading>Sorry!</Alert.Heading>
             <p>
-              The user email address or the vessel you entered does not currently exist in our system. 
+             The user email address or the vessel you entered does not currently exist in our system. 
             </p>
           </Alert>
         );
@@ -103,6 +118,25 @@ const WebMasterConnect = () => {
               onChange={(e) => setVessel(e.target.value)}
             ></input>
           </div>
+            <label for="checkmark">Please select which user roles to be added to the user.</label>
+            <div className="form-check">
+                <input className="form-check-input" type="checkbox" value="" id="canComment"></input>
+                    <label className="form-check-label" htmlFor="canComment">
+                        User can make comments.
+                    </label>
+            </div>
+            <div className="form-check">
+                <input className="form-check-input" type="checkbox" value="" id="canInvite"></input>
+                <label className="form-check-label" htmlFor="canInvite">
+                    User can invite other users.
+                </label>
+            </div>
+            <div className="form-check">
+                <input className="form-check-input" type="checkbox" value="" id="canEdit"></input>
+                <label className="form-check-label" htmlFor="canEdit">
+                    User can edit other user roles.
+                </label>
+            </div>
           <button class="register-button " type="submit" onClick={submit}>
             Submit
           </button>
